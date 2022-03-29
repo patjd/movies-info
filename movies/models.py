@@ -29,6 +29,7 @@ class Movie(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=1000)
     poster = models.ImageField(upload_to='poster')
+    banner = models.URLField(null=True)
     genres = models.ManyToManyField(Genre)
     language = models.ForeignKey(Language, on_delete=models.SET_NULL, null=True)
     cast = models.ManyToManyField(Cast)

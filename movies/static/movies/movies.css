@@ -1,0 +1,49 @@
+body {
+    background-color: black;
+}
+a {
+    text-decoration: none;
+}
+
+ul li {
+    display: inline;
+    color: white;
+    list-style-type: circle;
+}
+
+.movie-info-card {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+.movie-title {
+    font-weight: 900;
+    color: white;
+}
+
+.movie-title:hover {
+    color: #0495c9;
+}
+
+.movie-release-date {
+    color: rgba(0, 0, 0, 0.6);
+    color: white;
+}
+
+.watchlist-btn, .shopping-cart-btn {
+    color: #5799EF;
+    background-color: #ffffff14;
+    align-content: center;
+    width: 100%;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.detail-btn {
+    display: inline;
+}
+
+.btn:hover {
+    background-color: #0495c9;
+}

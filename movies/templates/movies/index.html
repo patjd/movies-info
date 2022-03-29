@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block page_title %}Home Page{% endblock %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "movies/movies.css" %}">
+{% endblock %}
 {% block content %}
     <!-- Navigation -->
     {% include 'movies/includes/navigation.html' %}

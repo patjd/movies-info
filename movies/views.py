@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_list_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Movie, Language, Genre, Cast
 
@@ -22,13 +22,21 @@ def index(request):
 
 
 def movie_details(request, movie_id):
-    movie = get_list_or_404(Movie, api_identifier=movie_id)[0]
+    movie = get_object_or_404(Movie, id=movie_id)
     image_url = 'http://' + request.get_host() + '/media/' + str(movie.poster)
-    return render(request, 'movies/movie-details.html', {
+    genres = [genre.name for genre in movie.genres.all()]
+    cast = [cast.name for cast in movie.cast.all()]
+    print(movie.genres.all())
+    return render(request, 'movies/movie-info.html', {
         'title': movie.title,
         'description': movie.description,
         'year': movie.released_date.year,
-        'poster': image_url
+        'release_date': movie.released_date,
+        'poster': image_url,
+        'genre': genres,
+        'runtime': movie.runtime,
+        'cast': cast,
+        'banner': movie.banner
     })
 
 
@@ -80,7 +88,7 @@ def add_movies(request):
         for actor in credit['cast'][:5]:
             cast = Cast.objects.get_or_create(name=actor['name'])
             cast_list.append(cast[0])
-
+        banner = 'https://image.tmdb.org/t/p/original' + movie_detail['backdrop_path']
         movie = Movie(
             title=movie_detail['title'],
             description=movie_detail['overview'],
@@ -88,6 +96,7 @@ def add_movies(request):
             released_date=parse_date(movie_detail['release_date']),
             runtime=movie_detail['runtime'],
             overall_rating=movie_detail['vote_average']/2,
+            banner=banner
         )
         movie.save()
         movie.cast.add(*cast_list)
