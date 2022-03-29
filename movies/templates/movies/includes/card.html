@@ -1,0 +1,45 @@
+<div class="col-md-2 mb-1">
+    <!--<div class="card p-5 text-center bg-image"
+         style="
+                                                background: linear-gradient(
+                                                    rgba(0, 0, 0, 0.5),
+                                                    rgba(0, 0, 0, 0.5)
+                                                ),
+                                                url(../../../media/{{ movie.poster }});
+                                                background-size: cover;
+                                                height: 100%;
+                                            ">
+        <div class="card-body">
+            <div class="d-flex justify-content-center align-items-center my-5">
+                <div class="text-white">
+
+
+                    <p class="card-text">$50</p>
+                    <a href="#" class="btn btn-primary">Add to cart</a>
+                    <a href="#" class="btn btn-secondary mt-2">Add to Watchlist</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <h5 class="card-title"><a href="3">{{ movie.title }}</a>
+                    </h5>
+    <p class="card-text">{{ movie.released_date }}</p>-->
+    <div class="card border-0" style="width: 100%; height: 100%; background-color: black">
+        <img class="card-img-top" style="border-radius: 5%" src="../../../media/{{ movie.poster }}" alt="Card image cap">
+        <div class="card-body">
+            <p><i class="bi bi-star" style="color: yellow; fill: yellow"></i><span style="margin-left: 10px; color: white; font-weight: 900">{{ movie.overall_rating }}</span></p>
+            <h7 class="card-text" style="font-weight: 900; color: white">{{ movie.title }}</h7>
+            <p class="card-text" style="color: rgba(0,0,0,0.6); color: white">{{ movie.released_date }}</p>
+            <button class="btn" style="color: #5799EF; background-color: #ffffff14; align-content: center; width: 100%; font-weight: 900">
+                <i class="bi bi-plus-lg" style="margin-right: 10px"></i>
+                Watchlist
+            </button>
+            <button class="btn" style="color: #5799EF; background-color: #ffffff14; align-content: center; width: 100%; font-weight: 900; margin-top: 5px">
+                <i class="bi bi-cart-plus" style="margin-right: 10px; font-weight: bolder"></i>
+                {{ movie.price }} CAD
+            </button>
+        </div>
+    </div>
+</div>
