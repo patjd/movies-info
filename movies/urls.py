@@ -2,6 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('search', views.search, name='search'),
+    path('forgot-password', views.forgot_password, name='forgot-password'),
     path('order-history', views.order_history, name='order-history'),
     path('place-order', views.place_order, name="place-order"),
     path('edit-profile', views.edit_user_details, name="edit-profile"),

@@ -27,6 +27,13 @@
                     <span class="badge bg-dark text-white ms-1 rounded-pill">{{ profile.cart.all|length }}</span>
                 </button>
             </form>-->
+            <ul class="nav justify-content-center ml-auto">
+               <form class="d-flex" action="{% url "search" %}" method="post">
+                   {% csrf_token %}
+                   <input class="form-control me-2" placeholder="Search" name="search" aria-label="Search">
+                   <button class="btn btn-outline-success" type="submit">Search</button>
+               </form>
+            </ul>
 
             <!-- My Profile -->
             {% if user.is_authenticated %}

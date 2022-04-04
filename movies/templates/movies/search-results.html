@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}Search Results{% endblock %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "movies/movies.css" %}">
+{% endblock %}
+{% block content %}
+    <!-- Navigation -->
+    {% include 'movies/includes/navigation.html' %}
+    <div style="margin-left: 200px; margin-right: 200px">
+        <h1 style="color: white; font-weight: 900; margin-top: 100px; margin-bottom: 5px">Results</h1>
+        <h5 style="color: white; font-weight: 500">{{ movies|length }} Titles</h5>
+        {% for movie in movies %}
+            {% include 'movies/includes/movie-info-card.html' with movie=movie%}
+        {% endfor %}
+    </div>
+
+    <!-- Footer -->
+
+{% endblock %}

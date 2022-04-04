@@ -1,10 +1,14 @@
 import decimal
+import random
+import string
 from textwrap import fill
 
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
+from django.template.loader import render_to_string
+
 from .models import Movie, Language, Genre, Cast, Client, Rating, Order
 from .forms import ProfileForm, OrderForm, SignUpForm
 
@@ -14,6 +18,10 @@ import os
 from tempfile import NamedTemporaryFile
 from urllib.request import urlopen
 from django.core.files import File
+
+from django.core.mail import send_mail
+from django.utils.html import strip_tags
+from django.conf import settings
 
 tmdb.API_KEY = '0a1eb75d23905284398cf65a74bcb87c'
 POSTER_URL = 'https://image.tmdb.org/t/p/original'
@@ -44,9 +52,11 @@ def signup(request):
             form = form.save(commit=False)
             form.set_password(form.password)
             form.save()
-            return HttpResponse("Sign-up successfully")
+            return render(request, 'movies/login.html')
         else:
-            return HttpResponse(form.errors)
+            print(form.errors)
+            return render(request, 'movies/sign-up.html', {'form': form})
+
     filled_form = SignUpForm()
     return render(request, 'movies/sign-up.html', {'fill_form':filled_form})
 
@@ -64,6 +74,25 @@ def auth(request):
 def signout(request):
     logout(request)
     return redirect('index')
+
+
+def forgot_password(request):
+    if request.method == 'GET':
+        return render(request, 'movies/forgot-password.html')
+    username = request.POST['username']
+    client = Client.objects.get(username=username)
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(random.choice(characters) for i in range(8))
+    client.set_password(password)
+    client.save()
+    send_mail('Movies Info - Forgot Password', 'Your new password is ' + password, settings.EMAIL_HOST_USER, [settings.RECIPIENT_ADDRESS])
+    return render(request, 'movies/login.html', {'forgot_password': True})
+
+
+def search(request):
+    search_term = request.POST['search']
+    movies = Movie.objects.filter(title__contains=search_term)
+    return render(request, 'movies/search-results.html', {'movies': movies})
 
 
 def add_to_cart(request, movie_id):
@@ -85,6 +114,7 @@ def order_history(request):
     client = Client.objects.get(username=request.user.username)
     orders = Order.objects.filter(client__username=client.username).order_by('-order_date')
     return render(request, 'movies/order-history.html', {'orders': orders})
+
 
 def remove_from_cart(request, movie_id):
     movie = Movie.objects.get(id=movie_id)
@@ -124,6 +154,10 @@ def place_order(request):
             filled_form.save()
             client.cart.clear()
             client.save()
+            html_content = render_to_string('movies/placed-order.html', {'order': filled_form})
+            text_content = strip_tags(html_content)
+            send_mail('Order', text_content, settings.EMAIL_HOST_USER,
+                      [settings.RECIPIENT_ADDRESS])
             return render(request, 'movies/placed-order.html', {'order': filled_form})
     else:
         fill_form = OrderForm()
