@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #171717;
+  /* background-image: url("../images/bg-pattern-top.svg"), url("../images/bg-pattern-bottom.svg");
+  background-repeat: no-repeat, no-repeat;
+  background-position: left 125% top 140%, right 125% bottom 170%; */
+}
+
+.container-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10em 0;
+}
+
+.card {
+  background-color: white;
+  /*border-radius: 16px;*/
+  box-shadow: 0px 0px 8px 2px rgba(251, 251, 251, 0.25);
+}
+
+.card-header {
+  /* background-image: url("../images/bg-pattern-card.svg"); */
+  background-color: white;
+  padding-top: 2em;
+  padding-bottom: 3em;
+  padding-left: 8em;
+  padding-right: 8em;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  position: relative;
+}
+
+.card-header .profile-img {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  border-radius: 50%;
+}
+
+.card-header .profile-img img {
+  border-radius: 50%;
+  border: 5px solid white;
+}
+
+.card-body hr {
+  opacity: 0.4;
+}
+
+.card-body .profile {
+  text-align: center;
+  margin-top: 4.8em;
+}
+
+.card-body .profile-name {
+  font-family: 'Kumbh Sans', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #2d3248;
+  margin-top: 1.5em;
+}
+
+.card-body{
+  font-size: 1rem;
+  font-family: 'Kumbh Sans', sans-serif;
+  font-weight: 400;
+  color: #6a6f81;
+}
+
+.card-body .profile-city {
+  font-size: 14px;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+  color: #6a6f81;
+}
+
+.card-body .profile-email {
+  font-size: 14px;
+  margin-bottom: 1em;
+  color: #6a6f81;
+}
+
+.card-body .editDetails{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.card-body .editDetailsBtn{
+  background-color: #5C5C5C;
+  color: white;
+  border-radius: 10px;
+  padding: 0.8em;
+  border: none;
+  cursor: pointer;
+  font-family: 'Kumbh Sans', sans-serif;
+}
+
+.card-body .stats {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  text-align: center;
+}
+
+.card-body .figures {
+  font-family: 'Kumbh Sans', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #2d3248;
+  margin-bottom: 0.4em;
+}
+
+.card-body .entity {
+  font-family: 'Kumbh Sans', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+@media screen and (min-width: 1100px) {
+  body {
+    background-color: #171717;
+    /* background-image: url("../images/bg-pattern-top.svg"), url("../images/bg-pattern-bottom.svg");
+    background-position: left -30% bottom -100%, right -40% bottom 200%;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 60% auto, 65% auto; */
+  }
+}

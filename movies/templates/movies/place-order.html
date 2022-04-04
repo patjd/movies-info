@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}Place Order{% endblock %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "movies/movies.css" %}">
+{% endblock %}
+{% block content %}
+    <!-- Navigation -->
+    {% include 'movies/includes/navigation.html' %}
+    <div style="color: white; display: flex; justify-content: center; align-items: center; margin: 5em">
+    <form action="{% url "place-order" %}" method="post" >
+    {%  csrf_token %}
+    {{ fill_form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    </div>
+
+    <!-- Footer -->
+    {% include 'movies/includes/footer.html' %}
+{% endblock %}

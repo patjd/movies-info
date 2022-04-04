@@ -27,19 +27,36 @@
                     </h5>
     <p class="card-text">{{ movie.released_date }}</p>-->
     <div class="card border-0 movie-info-card">
-        <a href="{% url "movie-details" movie.id %}"><img class="card-img-top" style="border-radius: 5%" src="../../../media/{{ movie.poster }}" alt="{{ movie.title }}"></a>
+        <div class="card-image">
+            <a href="{% url "movie-details" movie.id %}"><img class="card-img-top" style="border-radius: 5%" src="../../../media/{{ movie.poster }}" alt="{{ movie.title }}"></a>
+        <div class="card-img-overlay" style="margin: 0px; padding: 0px">
+            {% if movie in profile.watchlist.all %}
+                <a id="{{ movie.id }}" class="btn float-left clickable" style="margin: 0px; padding: 0px;" href="{% url "remove-watchlist" movie.id %}">
+                <h1><i class="bi bi-bookmark-check-fill" style="color: rgb(245 197 24); opacity: 0.8"></i></h1></a>
+            {% else %}
+                <a id="{{ movie.id }}" class="btn float-left clickable"
+                   href="{% if user.is_authenticated %}{% url 'add-watchlist' movie.id %}{% else %}{% url 'signin' %}{% endif %}"
+                   style="margin: 0px; padding: 0px;">
+                <h1><i class="bi bi-bookmark-plus-fill" style="color: white; opacity: 0.8"></i></h1></a>
+            {% endif %}
+        </div>
+        </div>
+
         <div class="card-body d-flex flex-column">
-            <p><i class="bi bi-star" style="color: yellow; fill: yellow"></i><span style="margin-left: 10px; color: white; font-weight: 900">{{ movie.overall_rating }}</span></p>
+            <p><i class="bi bi-star-fill" style="color: yellow; fill: yellow"></i><span style="margin-left: 10px; color: white; font-weight: 900">{{ movie.overall_rating }}</span></p>
             <a href="{% url "movie-details" movie.id %}"><h7 class="card-text movie-title">{{ movie.title }}</h7></a>
             <p class="card-text movie-release-date" >{{ movie.released_date }}</p>
-            <button class="btn mt-auto watchlist-btn">
-                <i class="bi bi-plus-lg" style="margin-right: 10px"></i>
-                Watchlist
-            </button>
-            <button class="btn shopping-cart-btn">
+
+            {% if movie in profile.cart.all %}
+            <a class="btn shopping-cart-btn mt-auto" style="background-color: darkred">
+                Remove from cart
+            </a>
+            {% else %}
+            <a class="btn shopping-cart-btn mt-auto" href="{% url "shopping-cart" movie.id %}">
                 <i class="bi bi-cart-plus" style="margin-right: 10px;"></i>
                 {{ movie.price }} CAD
-            </button>
+            </a>
+            {% endif %}
         </div>
     </div>
 </div>

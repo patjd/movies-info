@@ -1,0 +1,53 @@
+<div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <h6 class="modal-title w-100 font-weight-bold" style="text-align: center; color: yellow; margin-top: 0px">RATE THIS</h6>
+                <h4 class="modal-title w-100 font-weight-bold" style="text-align: center">{{ title }}</h4>
+                <form action="{% url 'rating' movie_id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row rating">
+                        {% for i in '54321'|make_list %}
+                            {% if rating == i|add:"0" %}
+                                <input type="radio" name="rating" value="{{ i }}" id="{{ i }}" checked><label for="{{ i }}">☆</label>
+                            {% else %}
+                                <input type="radio" name="rating" value="{{ i }}" id="{{ i }}"><label for="{{ i }}">☆</label>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="margin: 20px; width: 100%">Rate</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function rate() {
+        console.log(document.querySelector('input[name="rating"]:checked').value);
+        $.ajax({
+            type: 'GET',
+            url: "{% url 'index' %}",
+            data: {"nick_name": nick_name},
+            success: function (response) {
+                // if not valid user, alert the user
+                if(!response["valid"]){
+                    alert("You cannot create a friend with same nick name");
+                    var nickName = $("#id_nick_name");
+                    nickName.val("")
+                    nickName.focus()
+                }
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+    }
+</script>

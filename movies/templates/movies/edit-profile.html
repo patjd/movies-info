@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}{{ movie.title }}{% endblock %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "movies/movies.css" %}">
+{% endblock %}
+{% block content %}
+
+    <!-- Footer -->
+    <div style="color: white; display: flex; justify-content: center; align-items: center; margin: 5em">
+    <form action="{% url "edit-profile" %}" method="post" >
+    {%  csrf_token %}
+    {{ fill_form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    </div>
+
+    {% include 'movies/includes/footer.html' %}
+{% endblock %}

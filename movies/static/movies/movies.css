@@ -5,7 +5,7 @@ a {
     text-decoration: none;
 }
 
-ul li {
+.info li {
     display: inline;
     color: white;
     list-style-type: circle;
@@ -44,6 +44,79 @@ ul li {
     display: inline;
 }
 
-.btn:hover {
-    background-color: #0495c9;
+.form-group .label { display: block }
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 1em;
+    font-size: 4vw;
+    color: #FFD600;
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
+
+.modal-content {
+    background: #1f1f1f !important;
+    color: white;
+}
+
+.modal-header {
+    border-bottom: 0 none;
+}
+
+.modal-footer {
+    border-top: 0 none;
+}
+
+.random {
+    background-color: red;
+}
+
+.card-image {
+  position: relative;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.card:hover .image-overlay {
+    opacity: 1;
 }

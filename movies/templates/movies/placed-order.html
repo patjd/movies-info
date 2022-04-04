@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}Order History{% endblock %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "movies/movies.css" %}">
+{% endblock %}
+{% block content %}
+    <!-- Navigation -->
+    {% include 'movies/includes/navigation.html' %}
+    <div style="margin-left: 200px; margin-right: 200px">
+        <h1 style="color: white; font-weight: 900; margin-top: 100px; margin-bottom: 5px">Your order has been successfully Placed</h1>
+        {% include 'movies/includes/order.html' with order=order%}
+    </div>
+{% endblock %}

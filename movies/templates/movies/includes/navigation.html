@@ -8,44 +8,59 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <!-- Home Link -->
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url "index" %}">Home</a></li>
                 <!-- My WatchList Link -->
-                <li class="nav-item"><a class="nav-link" href="#!">My Watchlist</a></li>
             </ul>
-
-            <!-- Search bar -->
+            <!-- Search bar
             <form onsubmit="event.preventDefault()" class="form-inline my-2 my-lg-0 mr-3">
                 <div class="d-flex flex-lg-row">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search">
                     <button class="btn btn-secondary my-2 my-sm-0 mx-3" type="submit">Search</button>
                 </div>
-            </form>
+            </form>-->
 
-            <!-- My Cart -->
-            <form class="">
+            <!-- My Cart
+            <form class="ml-auto">
                 <button class="btn btn-outline-dark" type="submit">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">{{ profile.cart.all|length }}</span>
                 </button>
-            </form>
+            </form>-->
 
             <!-- My Profile -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">My Profile</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Edit Profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider"/>
-                        </li>
-                        <li><a class="dropdown-item" href="#!">Order History</a></li>
-                        <li><a class="dropdown-item" href="#!">SignOut</a></li>
-                    </ul>
-                </li>
-            </ul>
+            {% if user.is_authenticated %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 ml-auto">
+                    <li class="nav-item"><a class="nav-link"
+                    href="{% if user.is_authenticated %}{% url 'watchlist' %}{% else %}{% url 'signin' %}{% endif %}">
+                    Watchlist</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ user.first_name }} {{user.last_name}}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'profile' %}">My Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'watchlist' %}">Watchlist</a></li>
+                            <li><a class="dropdown-item" href="{% url "cart" %}">Shopping Cart</a></li>
+                            <li><a class="dropdown-item" href="{% url "order-history" %}">Order History</a></li>
+                            <li><a class="dropdown-item" href="{% url "signout" %}">Sign out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 ml-auto d-flex flex-row">
+                    <li class="nav-item"><a class="nav-link"
+                    href="{% if user.is_authenticated %}{% url 'watchlist' %}{% else %}{% url 'signin' %}{% endif %}">
+                    {{ profile.watchlist.all|length }} Watchlist</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url "signin" %}">Sign In</a></li>
+                </ul>
+
+            {% endif %}
 
         </div>
     </div>
 </nav>
+
+{% include 'movies/includes/login-modal.html' %}
+{% include 'movies/includes/signup-modal.html' %}

@@ -1,0 +1,43 @@
+<div class="card" style="background-color: #262626; margin-bottom: 20px">
+    <div class="card-header" style="color: white; border-bottom: 0 none">
+        <div class="row">
+            <div class="col-md-3">
+                <ul style="list-style: none">
+                    <li>
+                        <h7>ORDER ID</h7>
+                    </li>
+                    <li><h6>{{ order.id }}</h6></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul style="list-style: none">
+                    <li>
+                        <h7>TOTAL</h7>
+                    </li>
+                    <li><h6>{{ order.total_price }} CAD</h6></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul style="list-style: none">
+                    <li>
+                        <h7>SHIP TO</h7>
+                    </li>
+                    <li><h6>{{ order.first_name }} {{ order.last_name }}</h6></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul style="list-style: none">
+                    <li>
+                        <h7>ORDER DATE</h7>
+                    </li>
+                    <li><h6>{{ order.order_date }}</h6></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        {% for movie in order.movies.all %}
+            {% include 'movies/includes/order-history-card.html' with movie=movie %}
+        {% endfor %}
+    </div>
+</div>

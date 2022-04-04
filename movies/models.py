@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-
+import datetime
 
 # Create your models here.
 
@@ -8,7 +8,7 @@ class Genre(models.Model):
     name = models.CharField(max_length=20)
 
     def __str__(self):
-        return str(self.id) + ' ' + self.name
+        return self.name
 
 
 class Cast(models.Model):
@@ -37,6 +37,7 @@ class Movie(models.Model):
     runtime = models.PositiveIntegerField()
     overall_rating = models.DecimalField(max_digits=2, decimal_places=1, default=0)
     price = models.DecimalField(max_digits=5, decimal_places=2, default=10)
+    vote_count = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -52,15 +53,19 @@ class Client(User):
 
 
 class Rating(models.Model):
-    rating = models.DecimalField(max_digits=2, decimal_places=1)
+    rating = models.IntegerField()
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
 
 
 class Order(models.Model):
-    shipping_address = models.TextField(max_length=1000)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=30, default="John")
+    last_name = models.CharField(max_length=30, default="Doe")
+    email = models.EmailField(max_length=254, default="johndoe@gmail.com")
+    shipping_address = models.TextField(max_length=1000)
     movies = models.ManyToManyField(Movie)
+    order_date = models.DateTimeField(default=datetime.datetime.now())
     total_price = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self):

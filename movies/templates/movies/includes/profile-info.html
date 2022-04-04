@@ -1,0 +1,55 @@
+<!--<div class="container-profile" >
+  <div class="card">
+    <div class="card-header">
+      <div class="profile-img">
+        <img src="https://raw.githubusercontent.com/ParthLPatel/Profile-Card/main/images/image-victor.jpg" alt="">
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="profile">
+        <p class="profile-name">{{ profile.first_name }} {{ profile.last_name }}</p>
+        <p class="profile-city">{{ profile.username }}</p>
+        <p class="profile-email">{{ profile.email }}</p>
+      </div>
+      <div class="editDetails">
+        <a class="editDetailsBtn" href="{% url "edit-profile" %}">Edit Details</a>
+      </div>
+      <hr>
+      <div class="stats">
+        <div class="stats-1">
+          <p class="figures">{{ profile.watchlist.all|length }}</p>
+          <p class="entity">My Watchlist</p>
+        </div>
+        <div class="stats-2">
+          <p class="figures">{{ profile.cart.all|length }}</p>
+          <p class="entity">My Cart</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>-->
+<div style="margin-left: 200px; margin-right: 200px">
+    <h1 style="color: white; font-weight: 900; margin-top: 100px; margin-bottom: 5px">My Profile</h1>
+    <h5 style="color: white; font-weight: 500"></h5>
+    <div style="color: white;">
+        <div class="row">
+            <div class="col-md-12">
+                <ul style="list-style: none">
+                    <li>First Name</li>
+                    <li>{{ profile.first_name }}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ul style="list-style: none">
+                    <li>Last Name</li>
+                    <li>{{ profile.last_name }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>

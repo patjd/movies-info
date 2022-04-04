@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}Shopping Cart{% endblock %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "movies/movies.css" %}">
+{% endblock %}
+{% block content %}
+    <!-- Navigation -->
+    {% include 'movies/includes/navigation.html' %}
+    <div style="margin-left: 200px; margin-right: 200px; color: white">
+        <h1 style="color: white; font-weight: 900; margin-top: 100px; margin-bottom: 20px">{{ user.first_name }}'s
+            Shopping Cart</h1>
+    {% if movies|length != 0 %}
+        {% for movie in movies %}
+            {% include 'movies/includes/movie-shopping-card.html' with movie=movie %}
+        {% endfor %}
+        <div class="pull-right">
+            <h5>Subtotal ({{ movies|length }} items): <span
+                    style="font-weight: 900">{{ total }} CAD</span></h5>
+            <a class="btn btn-primary" href="{% url 'place-order' %}">Proceed to checkout</a>
+        </div>
+    {% else %}
+        <div style="color: white; font-weight: 900; height: 400px; width: 100%;">
+            <h3>Your Cart is Empty</h3>
+            <h5><a href="{% url 'index' %}">Click here to add some movies</a></h5>
+        </div>
+    {% endif %}
+
+    </div>
+    {% include 'movies/includes/footer.html' %}
+    <!-- Footer -->
+
+{% endblock %}

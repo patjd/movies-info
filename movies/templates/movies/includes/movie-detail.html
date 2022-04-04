@@ -1,6 +1,5 @@
-<div class="card mb-3" style="max-width: 100%; color: white;
+<div class="card mb-3" style="color: white;
     background-size: cover;
-        border-bottom: 1px solid var(--primaryColor);
     background-position: right -200px top;
 background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.84)), url({{ banner }}) no-repeat;">
     <div class="row g-0" style="margin-top: 40px">
@@ -17,22 +16,52 @@ background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0
                     </div>
                 </div>
                 <div class="row">
-                    <ul>
+                    <ul class="info">
                         <li><i class="bi bi-dot"></i>{{ release_date }}</li>
                         <li><i class="bi bi-dot"></i>{{ genre|join:', ' }}</li>
                         <li><i class="bi bi-dot"></i>{{ runtime }} mins</li>
                     </ul>
                 </div>
                 <div class="row">
-                    <ul>
-                        <li><button class="btn rounded-circle"
-                                    style="background-color: black"
-                        data-toggle="tooltip" data-placement="bottom" title="Add to Watchlist">
-                            <i class="bi bi-bookmark-fill" style="color: white"></i></button></li>
-                        <li><button class="btn rounded-circle" style="background-color:black; margin-left: 20px"
-                        data-toggle="tooltip" data-placement="bottom" title="Rate the Movie"><i class="bi bi-star-fill" style="color: white"></i></button></li>
-                    </ul>
+                    <div class="col-md-2">
+                        <ul style="list-style: none; padding: 0px; text-align: center">
+                            <li><h5>Overall Rating</h5></li>
+                            <li><h5><i class="bi bi-star-fill" style="color: yellow; margin-right: 5px"></i>{{ overall_rating }}</h5></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2">
+                        <ul style="list-style: none; padding:0px; text-align: center">
+                            <li><h5>Your Rating</h5></li>
+                            {% if rating != 0 %}
+                                <li>
+                                    <h5>
+                                        <a href="#" data-toggle="modal" data-target="#ratingModal" style="color: white">
+                                            <i class="bi bi-star-fill" style="color: cornflowerblue; margin-right: 5px"></i>
+                                                {{ rating }}
+                                        </a>
+                                    </h5>
+                                </li>
+                            {% else %}
+                                <li style="text-align: center"><a href="#" data-toggle="modal" data-target="#ratingModal"><h5>Rate</h5></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
                 </div>
+                <!--<div class="row">
+                    <ul>
+                        <li>
+                            <button class="btn rounded-circle"
+                                    style="background-color: black"
+                                    data-toggle="tooltip" data-placement="bottom" title="Add to Watchlist">
+                            <i class="bi bi-bookmark-fill" style="color: white"></i></button>
+                        </li>
+                        <li><a class="btn rounded-circle" style="background-color:black; margin-left: 20px"
+                        href="#!" data-toggle="modal" data-target="#ratingModal">
+                            <i class="bi bi-star-fill" style="color: white"></i>
+                        </a></li>
+                    </ul>
+                </div> -->
                 <div class="row">
                     <div class="col-md-10">
                         <h3 class="mt-4" style="color: white">Overview</h3>
@@ -47,7 +76,8 @@ background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0
                     </div>
 
                 </div>
-
+                <div>
+                </div>
             </div>
         </div>
     </div>

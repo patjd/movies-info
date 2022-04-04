@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}Order History{% endblock %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "movies/movies.css" %}">
+{% endblock %}
+{% block content %}
+    <!-- Navigation -->
+    {% include 'movies/includes/navigation.html' %}
+    <div style="margin-left: 200px; margin-right: 200px">
+        <h1 style="color: white; font-weight: 900; margin-top: 100px; margin-bottom: 5px">{{ user.first_name }}'s Orders</h1>
+        <h5 style="color: white; font-weight: 500">{{ orders|length }} Orders</h5>
+        {% for order in orders %}
+            {% include 'movies/includes/order.html' %}
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

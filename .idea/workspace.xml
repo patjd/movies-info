@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c4c27428-608c-4121-8ee2-9c09f4aae04f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/movies/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/migrations/0004_movie_vote_count.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/migrations/0005_alter_rating_rating.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/static/movies/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/static/movies/profile.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/edit-profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/includes/movie-info-card.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/includes/movie-shopping-card.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/includes/order-history-card.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/includes/order.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/includes/profile-info.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/includes/rating-modal.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/includes/signup-modal.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/order-history.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/place-order.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/placed-order.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/shopping-cart.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/watchlist.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/movies_info.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/movies_info.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/static/movies/movies.css" beforeDir="false" afterPath="$PROJECT_DIR$/movies/static/movies/movies.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/templates/movies/includes/card.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/includes/card.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/templates/movies/includes/movie-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/includes/movie-detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/templates/movies/includes/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/includes/navigation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/templates/movies/includes/section.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/includes/section.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/templates/movies/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/templates/movies/movie-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/movie-info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies_info/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies_info/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="27JLn3pH6hWOg8DcZMbKTEsyGgy" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\UWindsor Resources\COMP-8347\Final\movies_info\movies_info\movies\templates\movies" />
+      <recent name="D:\UWindsor Resources\COMP-8347\Final\movies_info\movies_info\movies\templates\movies\includes" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="movies_info" type="Python.DjangoServer" factoryName="Django server">
+      <module name="movies_info" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="movies_info.settings" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Jaydeep\.virtualenvs\movies_info\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c4c27428-608c-4121-8ee2-9c09f4aae04f" name="Changes" comment="" />
+      <created>1649033409142</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1649033409142</updated>
+      <workItem from="1649033410656" duration="8580000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
