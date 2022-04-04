@@ -14,6 +14,7 @@ class ProfileForm(forms.ModelForm):
             'address':forms.TextInput(attrs={'class': 'form-control'})
         }
 
+
 class SignUpForm(forms.ModelForm):
     class Meta:
         model = Client
@@ -26,6 +27,7 @@ class SignUpForm(forms.ModelForm):
             'password': forms.TextInput(attrs={'class': 'form-control'}),
             # 'address': forms.TextInput(attrs={'class': 'form-control'})
         }
+
 
 class OrderForm(forms.ModelForm):
     class Meta:

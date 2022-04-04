@@ -2,6 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('change-password', views.change_password, name='change-password'),
+    path('cast/<cast_id>', views.cast, name='cast'),
     path('search', views.search, name='search'),
     path('forgot-password', views.forgot_password, name='forgot-password'),
     path('order-history', views.order_history, name='order-history'),
@@ -19,6 +21,6 @@ urlpatterns = [
     path('signup', views.signup, name="signup"),
     path('signin', views.signin, name="signin"),
     path('signout', views.signout, name="signout"),
-    path('<movie_id>', views.movie_details, name="movie-details"),
-    path('', views.add_movies)
+    path('<movie_id>', views.MovieDetailsView.as_view(), name="movie-details"),
+    path('load-data', views.add_movies)
 ]

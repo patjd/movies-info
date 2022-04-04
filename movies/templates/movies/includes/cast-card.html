@@ -1,0 +1,15 @@
+<div style="margin-left: 100px">
+    <h1 style="color: white; font-weight: 900;  margin-bottom: 5px">Cast</h1>
+    <div class="row">
+        {% for actor in cast %}
+        <div class="col-md-2">
+            <div class="card" style="background-color: black; color: white">
+                <img src="{{ actor.image }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <a style="color: white" class="card-title" href="{% url "cast" actor.id %}"><h5>{{ actor.name }}</h5></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

@@ -48,7 +48,7 @@
             <p class="card-text movie-release-date" >{{ movie.released_date }}</p>
 
             {% if movie in profile.cart.all %}
-            <a class="btn shopping-cart-btn mt-auto" style="background-color: darkred">
+            <a class="btn shopping-cart-btn mt-auto" style="background-color: darkred" href="{% url "remove-cart" movie.id %}">
                 Remove from cart
             </a>
             {% else %}

@@ -9,10 +9,14 @@
     {% include 'movies/includes/navigation.html' %}
     <div style="margin-left: 200px; margin-right: 200px">
         <h1 style="color: white; font-weight: 900; margin-top: 100px; margin-bottom: 5px">Results</h1>
+        {% if movies %}
         <h5 style="color: white; font-weight: 500">{{ movies|length }} Titles</h5>
         {% for movie in movies %}
             {% include 'movies/includes/movie-info-card.html' with movie=movie%}
         {% endfor %}
+    {% else %}
+    <h5 style="color: white; font-weight: 500">No movies found!</h5>
+    {% endif %}
     </div>
 
     <!-- Footer -->

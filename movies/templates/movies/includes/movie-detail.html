@@ -1,7 +1,7 @@
 <div class="card mb-3" style="color: white;
     background-size: cover;
     background-position: right -200px top;
-background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.84)), url({{ banner }}) no-repeat;">
+    background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.84)), url({{ banner }}) no-repeat;">
     <div class="row g-0" style="margin-top: 40px">
         <div class="col-md-3">
             <img src="{{ poster }}" class="img-fluid rounded-start" alt="..."
@@ -29,8 +29,10 @@ background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0
                             <li><h5><i class="bi bi-star-fill" style="color: yellow; margin-right: 5px"></i>{{ overall_rating }}</h5></li>
                         </ul>
                     </div>
+                {% if user.is_authenticated %}
                     <div class="col-md-2">
                         <ul style="list-style: none; padding:0px; text-align: center">
+
                             <li><h5>Your Rating</h5></li>
                             {% if rating != 0 %}
                                 <li>
@@ -46,7 +48,7 @@ background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0
                             {% endif %}
                         </ul>
                     </div>
-
+                {% endif %}
                 </div>
                 <!--<div class="row">
                     <ul>
@@ -69,14 +71,21 @@ background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0
                     </div>
 
                 </div>
-                 <div class="row">
+                 <!--<div class="row">
                     <div class="col-md-10">
                         <h3 class="mt-4" style="color: white">Cast</h3>
                         <p>{{ cast|join:', ' }}</p>
                     </div>
 
-                </div>
-                <div>
+                </div>-->
+
+                <div class="row">
+                    <div class="col-md-10">
+                        <a class="btn shopping-cart-btn mt-auto" href="{% if user.is_authenticated %}{% url "shopping-cart" movie_id %}{% else %}{% url "signin" %}{% endif %}">
+                            <i class="bi bi-cart-plus" style="margin-right: 10px;"></i>
+                            {{ price }} CAD
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

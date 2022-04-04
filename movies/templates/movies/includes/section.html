@@ -5,17 +5,17 @@
                 <h3 class="mb-3" style="color: white; font-weight: 1000">{{ section_title }}</h3>
             </div>
             <div class="col-6 text-right">
-                <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators_0" role="button"
+                <a class="btn btn-primary mb-3 mr-1" href="#{{ id }}" role="button"
                    data-slide="prev">
                     <i class="fa fa-arrow-left"></i>
                 </a>
-                <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators_0" role="button"
+                <a class="btn btn-primary mb-3 " href="#{{ id }}" role="button"
                    data-slide="next">
                     <i class="fa fa-arrow-right"></i>
                 </a>
             </div>
             <div class="col-12">
-                <div id="carouselExampleIndicators_0" class="carousel slide" data-ride="carousel">
+                <div id="{{ id }}" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <div class="row">

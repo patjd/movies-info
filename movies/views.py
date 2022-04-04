@@ -1,6 +1,7 @@
 import decimal
 import random
 import string
+from itertools import islice
 from textwrap import fill
 
 from django.contrib.auth.models import User
@@ -8,6 +9,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.template.loader import render_to_string
+from django.views import View
 
 from .models import Movie, Language, Genre, Cast, Client, Rating, Order
 from .forms import ProfileForm, OrderForm, SignUpForm
@@ -28,21 +30,22 @@ POSTER_URL = 'https://image.tmdb.org/t/p/original'
 
 
 # Create your views here.
-def index(request):
-    print(request)
-    top_movies = Movie.objects.all().order_by('-overall_rating')
-    top_action_movies = Movie.objects.filter(genres__name='Action').order_by('-overall_rating')
-    top_thriller_movies = Movie.objects.filter(genres__name='Thriller')
-    context = {
-        'top_movies': top_movies,
-        'top_action_movies': top_action_movies,
-        'top_thriller_movies': top_thriller_movies
-    }
-    if request.user.is_authenticated:
-        client = Client.objects.get(username=request.user.username)
-        context['profile'] = client
-        print(client.watchlist.all())
-    return render(request, 'movies/index.html', context)
+class IndexView(View):
+
+    def get(self, request):
+        top_movies = Movie.objects.all().order_by('-overall_rating')
+        top_action_movies = Movie.objects.filter(genres__name='Action').order_by('-overall_rating')
+        top_thriller_movies = Movie.objects.filter(genres__name='Thriller')
+        context = {
+            'top_movies': top_movies,
+            'top_action_movies': top_action_movies,
+            'top_thriller_movies': top_thriller_movies
+        }
+        if request.user.is_authenticated:
+            client = Client.objects.get(username=request.user.username)
+            context['profile'] = client
+            print(client.watchlist.all())
+        return render(request, 'movies/index.html', context)
 
 
 def signup(request):
@@ -58,17 +61,37 @@ def signup(request):
             return render(request, 'movies/sign-up.html', {'form': form})
 
     filled_form = SignUpForm()
-    return render(request, 'movies/sign-up.html', {'fill_form':filled_form})
+    return render(request, 'movies/sign-up.html', {'fill_form': filled_form})
 
 
 def signin(request):
     return render(request, 'movies/login.html')
 
 
+def change_password(request):
+    if request.method == 'POST':
+        oldpassword = request.POST['oldpassword']
+        newpassword = request.POST['newpassword']
+        client = Client.objects.get(username=request.user.username)
+        if client.check_password(oldpassword):
+            client.set_password(newpassword)
+            client.save()
+            send_mail('OMDb - Password Change', 'Dear ' + client.first_name+ ', Your password has been successfully changed!', settings.EMAIL_HOST_USER,
+                      [settings.RECIPIENT_ADDRESS])
+            return render(request, 'movies/profile.html', {'profile': client})
+        else:
+            return render(request, 'movies/change-password.html', {'errors': True})
+    else:
+        return render(request, 'movies/change-password.html')
+
+
 def auth(request):
     user = authenticate(username=request.POST['username'], password=request.POST['password'])
-    login(request, user)
-    return redirect('index')
+    if user is not None:
+        login(request, user)
+        return redirect('index')
+    else:
+        return render(request, 'movies/login.html', {'errors': True})
 
 
 def signout(request):
@@ -77,16 +100,22 @@ def signout(request):
 
 
 def forgot_password(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
+        username = request.POST['username']
+        try:
+            client = Client.objects.get(username=username)
+        except Client.DoesNotExist:
+            return render(request, 'movies/forgot-password.html', {'errors': True})
+
+        characters = string.ascii_letters + string.digits + string.punctuation
+        password = ''.join(random.choice(characters) for i in range(8))
+        client.set_password(password)
+        client.save()
+        send_mail('Movies Info - Forgot Password', 'Your new password is ' + password, settings.EMAIL_HOST_USER,
+                  [settings.RECIPIENT_ADDRESS])
+        return render(request, 'movies/login.html', {'forgot_password': True})
+    else:
         return render(request, 'movies/forgot-password.html')
-    username = request.POST['username']
-    client = Client.objects.get(username=username)
-    characters = string.ascii_letters + string.digits + string.punctuation
-    password = ''.join(random.choice(characters) for i in range(8))
-    client.set_password(password)
-    client.save()
-    send_mail('Movies Info - Forgot Password', 'Your new password is ' + password, settings.EMAIL_HOST_USER, [settings.RECIPIENT_ADDRESS])
-    return render(request, 'movies/login.html', {'forgot_password': True})
 
 
 def search(request):
@@ -96,10 +125,11 @@ def search(request):
 
 
 def add_to_cart(request, movie_id):
+    print(request.path)
     movie = Movie.objects.get(id=movie_id)
     client = Client.objects.get(username=request.user.username)
     client.cart.add(movie)
-    return redirect('index')
+    return redirect('cart')
 
 
 def shopping_cart(request):
@@ -122,6 +152,11 @@ def remove_from_cart(request, movie_id):
     client.cart.remove(movie)
     client.save()
     return redirect('cart')
+
+
+def cast(request, cast_id):
+    cast_detail = Cast.objects.get(id=cast_id)
+    return render(request, 'movies/cast.html', {'cast': cast_detail})
 
 
 def watchlist(request):
@@ -162,6 +197,7 @@ def place_order(request):
     else:
         fill_form = OrderForm()
         return render(request, 'movies/place-order.html', {'fill_form': fill_form})
+
 
 def edit_user_details(request):
     client = Client.objects.get(username=request.user.username)
@@ -212,35 +248,36 @@ def add_to_watchlist(request, movie_id):
     return redirect('index')
 
 
-def movie_details(request, movie_id):
-    print(request.build_absolute_uri())
-    movie = get_object_or_404(Movie, id=movie_id)
-    client = Client.objects.get(username=request.user.username)
-    rating = Rating.objects.filter(movie=movie).filter(client=client)
-    print(rating)
-    image_url = 'http://' + request.get_host() + '/media/' + str(movie.poster)
-    genres = [genre.name for genre in movie.genres.all()]
-    cast = [cast.name for cast in movie.cast.all()]
-    print(movie.genres.all())
-    if len(rating) != 0:
-        rate = rating[0].rating
-    else:
-        rate = 0
-    context = {
-        'movie_id': movie_id,
-        'title': movie.title,
-        'description': movie.description,
-        'year': movie.released_date.year,
-        'release_date': movie.released_date,
-        'poster': image_url,
-        'genre': genres,
-        'runtime': movie.runtime,
-        'cast': cast,
-        'banner': movie.banner,
-        'rating': rate,
-        'overall_rating': movie.overall_rating
-    }
-    return render(request, 'movies/movie-info.html', context)
+class MovieDetailsView(View):
+
+    def get(self, request, *args, **kwargs):
+        movie = get_object_or_404(Movie, id=kwargs['movie_id'])
+        client = Client.objects.get(username=request.user.username)
+        rating = Rating.objects.filter(movie=movie).filter(client=client)
+        print(rating)
+        image_url = 'http://' + request.get_host() + '/media/' + str(movie.poster)
+        genres = [genre.name for genre in movie.genres.all()]
+        print(movie.genres.all())
+        if len(rating) != 0:
+            rate = rating[0].rating
+        else:
+            rate = 0
+        context = {
+            'movie_id': kwargs['movie_id'],
+            'title': movie.title,
+            'description': movie.description,
+            'year': movie.released_date.year,
+            'release_date': movie.released_date,
+            'poster': image_url,
+            'genre': genres,
+            'runtime': movie.runtime,
+            'banner': movie.banner,
+            'rating': rate,
+            'overall_rating': movie.overall_rating,
+            'cast': movie.cast.all(),
+            'price': movie.price
+        }
+        return render(request, 'movies/movie-info.html', context)
 
 
 def rate_movie(request, movie_id):
@@ -249,7 +286,7 @@ def rate_movie(request, movie_id):
     client = Client.objects.get(username=request.user.username)
     movie = Movie.objects.get(id=movie_id)
     updated_rating = (movie.overall_rating * movie.vote_count + decimal.Decimal(float(user_rating))) / (
-                movie.vote_count + 1)
+            movie.vote_count + 1)
     movie.overall_rating = updated_rating
     movie.vote_count = movie.vote_count + 1
     movie.save()
@@ -313,7 +350,19 @@ def add_movies(request):
         cast_list = []
 
         for actor in credit['cast'][:5]:
-            cast = Cast.objects.get_or_create(name=actor['name'])
+            people = tmdb.People(actor['id']).info()
+            image = ''
+            birthday = ''
+            bio = ''
+            if isinstance(people['birthday'], str):
+                birthday = people['birthday']
+            if isinstance(people['profile_path'], str):
+                image = 'https://image.tmdb.org/t/p/original' + people['profile_path']
+            if isinstance(people['biography'], str):
+                bio = people['biography']
+
+            cast = Cast.objects.get_or_create(name=people['name'], bio=bio, birthday=birthday, image=image)
+
             cast_list.append(cast[0])
 
         if movie_detail['backdrop_path'] is not None:

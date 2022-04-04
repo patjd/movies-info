@@ -36,17 +36,42 @@
     <div style="color: white;">
         <div class="row">
             <div class="col-md-12">
-                <ul style="list-style: none">
-                    <li>First Name</li>
-                    <li>{{ profile.first_name }}</li>
+                <ul style="list-style: none; display: inline">
+                    <li><h5>Username</h5></li>
+                    <li><h4 style="font-weight: 900">{{ profile.username }}</h4></li>
                 </ul>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <ul style="list-style: none">
-                    <li>Last Name</li>
-                    <li>{{ profile.last_name }}</li>
+                <ul style="list-style: none; display: inline">
+                    <li><h5>First Name</h5></li>
+                    <li><h4 style="font-weight: 900">{{ profile.first_name }}</h4></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ul style="list-style: none; display: inline">
+                    <li><h5>Last Name</h5></li>
+                    <li><h4 style="font-weight: 900">{{ profile.last_name }}</h4></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ul style="list-style: none; display: inline">
+                    <li><h5>Email</h5></li>
+                    <li><h4 style="font-weight: 900">{{ profile.email }}</h4></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ul style="list-style: none; display: inline">
+                    <li><h5>Password</h5></li>
+                    <li><h4 style="font-weight: 900">***********</h4></li>
+                    <li><a class="btn btn-primary" href="{% url "change-password" %}">Change Password</a></li>
                 </ul>
             </div>
         </div>

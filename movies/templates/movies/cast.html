@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block page_title %}{{ user }}'s Profile{% endblock %}
+{% block page_title %}{{ movie.title }}{% endblock %}
 {% block css_files %}
-    <link rel="stylesheet" href="{% static "movies/profile.css" %}">
+    <link rel="stylesheet" href="{% static "movies/movies.css" %}">
 {% endblock %}
 {% block content %}
     <!-- Navigation -->
     {% include 'movies/includes/navigation.html' %}
+    {% include 'movies/includes/cast-detail.html' %}
+
     <!-- Footer -->
-    {% include 'movies/includes/profile-info.html' %}
 
 {% endblock %}

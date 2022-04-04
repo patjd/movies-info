@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 import datetime
 
+
 # Create your models here.
 
 class Genre(models.Model):
@@ -13,6 +14,9 @@ class Genre(models.Model):
 
 class Cast(models.Model):
     name = models.CharField(max_length=50)
+    bio = models.TextField(null=True, blank=True)
+    image = models.URLField(null=True, blank=True)
+    birthday = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return self.name
