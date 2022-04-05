@@ -7,7 +7,7 @@
 {% block content %}
     <!-- Navigation -->
     {% include 'movies/includes/navigation.html' %}
-    <div style="margin-left: 200px; margin-right: 200px; color: white">
+    <div style="margin-left: 200px; margin-right: 200px; margin-bottom:50px; color: white">
         <h1 style="color: white; font-weight: 900; margin-top: 100px; margin-bottom: 20px">{{ user.first_name }}'s
             Shopping Cart</h1>
     {% if movies|length != 0 %}
@@ -27,7 +27,6 @@
     {% endif %}
 
     </div>
-    {% include 'movies/includes/footer.html' %}
     <!-- Footer -->
 
 {% endblock %}

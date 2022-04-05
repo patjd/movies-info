@@ -1,0 +1,12 @@
+<html>
+<body>
+<p>Dear {{ order.first_name }}</p>
+<p>Your order has been successfully placed</p>
+<p>Order Summary:</p>
+<p>Order # : <span>{{ order.id }}</span></p>
+<p>Order Date : <span>{{ order.order_date }}</span></p>
+<p>Shipping Address : <span>{{ order.shipping_address }}</span></p>
+<p>Total : <span>{{ order.total_price }}</span></p>
+<p>Items : <span>{{ movies|join:", " }}</span></p>
+</body>
+</html>

@@ -12,7 +12,7 @@
         {% if movies %}
         <h5 style="color: white; font-weight: 500">{{ movies|length }} Titles</h5>
         {% for movie in movies %}
-            {% include 'movies/includes/movie-info-card.html' with movie=movie%}
+            {% include 'movies/includes/search-info-card.html' with movie=movie%}
         {% endfor %}
     {% else %}
     <h5 style="color: white; font-weight: 500">No movies found!</h5>

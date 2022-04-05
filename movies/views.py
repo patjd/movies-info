@@ -21,7 +21,7 @@ from tempfile import NamedTemporaryFile
 from urllib.request import urlopen
 from django.core.files import File
 
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
 from django.utils.html import strip_tags
 from django.conf import settings
 
@@ -35,7 +35,7 @@ class IndexView(View):
     def get(self, request):
         top_movies = Movie.objects.all().order_by('-overall_rating')
         top_action_movies = Movie.objects.filter(genres__name='Action').order_by('-overall_rating')
-        top_thriller_movies = Movie.objects.filter(genres__name='Thriller')
+        top_thriller_movies = Movie.objects.filter(genres__name='Drama').order_by('-overall_rating')
         context = {
             'top_movies': top_movies,
             'top_action_movies': top_action_movies,
@@ -76,7 +76,11 @@ def change_password(request):
         if client.check_password(oldpassword):
             client.set_password(newpassword)
             client.save()
-            send_mail('OMDb - Password Change', 'Dear ' + client.first_name+ ', Your password has been successfully changed!', settings.EMAIL_HOST_USER,
+            user = authenticate(username=client.username, password=newpassword)
+            login(request, user)
+            email_content = render_to_string('movies/includes/email-changed-password.html')
+            text_content = strip_tags(email_content)
+            send_mail('OMDb - Password Change', text_content, settings.EMAIL_HOST_USER,
                       [settings.RECIPIENT_ADDRESS])
             return render(request, 'movies/profile.html', {'profile': client})
         else:
@@ -112,7 +116,7 @@ def forgot_password(request):
         client.set_password(password)
         client.save()
         send_mail('Movies Info - Forgot Password', 'Your new password is ' + password, settings.EMAIL_HOST_USER,
-                  [settings.RECIPIENT_ADDRESS])
+                  [client.email])
         return render(request, 'movies/login.html', {'forgot_password': True})
     else:
         return render(request, 'movies/forgot-password.html')
@@ -156,7 +160,8 @@ def remove_from_cart(request, movie_id):
 
 def cast(request, cast_id):
     cast_detail = Cast.objects.get(id=cast_id)
-    return render(request, 'movies/cast.html', {'cast': cast_detail})
+    birthday = parse_date(cast_detail.birthday)
+    return render(request, 'movies/cast.html', {'cast': cast_detail, 'birthday': birthday})
 
 
 def watchlist(request):
@@ -189,10 +194,13 @@ def place_order(request):
             filled_form.save()
             client.cart.clear()
             client.save()
-            html_content = render_to_string('movies/placed-order.html', {'order': filled_form})
+            order_movies = [movie.title for movie in filled_form.movies.all()]
+            html_content = render_to_string('movies/includes/email-order.html', {'order': filled_form, 'movies': order_movies})
             text_content = strip_tags(html_content)
-            send_mail('Order', text_content, settings.EMAIL_HOST_USER,
-                      [settings.RECIPIENT_ADDRESS])
+            #send_mail('Order', text_content, settings.EMAIL_HOST_USER,[settings.RECIPIENT_ADDRESS])
+            msg = EmailMultiAlternatives('Order', text_content, settings.EMAIL_HOST_USER, [client.email])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
             return render(request, 'movies/placed-order.html', {'order': filled_form})
     else:
         fill_form = OrderForm()
@@ -254,10 +262,15 @@ class MovieDetailsView(View):
         movie = get_object_or_404(Movie, id=kwargs['movie_id'])
         client = Client.objects.get(username=request.user.username)
         rating = Rating.objects.filter(movie=movie).filter(client=client)
-        print(rating)
+
         image_url = 'http://' + request.get_host() + '/media/' + str(movie.poster)
         genres = [genre.name for genre in movie.genres.all()]
-        print(movie.genres.all())
+
+        if movie in client.cart.all():
+            incart = True
+        else:
+            incart = False
+
         if len(rating) != 0:
             rate = rating[0].rating
         else:
@@ -275,7 +288,8 @@ class MovieDetailsView(View):
             'rating': rate,
             'overall_rating': movie.overall_rating,
             'cast': movie.cast.all(),
-            'price': movie.price
+            'price': movie.price,
+            'cart': incart
         }
         return render(request, 'movies/movie-info.html', context)
 
@@ -329,7 +343,7 @@ def add_movies(request):
     }
     list_of_movies = []
 
-    years = [2017, 2018, 2019, 2020, 2021, 2022]
+    years = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
     discover = tmdb.Discover()
     for year in years:
         movies = discover.movie(

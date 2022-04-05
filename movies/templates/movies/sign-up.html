@@ -38,8 +38,12 @@
                 <input type="password" class="form-control" id="floatingPassword" name="password" required>
                 <label for="floatingPassword">Password</label>
             </div>
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-primary" style="margin-top: 10px; justify-content: center" type="submit" >Signup</button>
+
         </form>
+        <div class="col" style="margin-top: 10px">
+            <a href="{% url "signin" %}">Go to Signin</a>
+        </div>
     {{ form.errors }}
         {% if form.errors %}
             {% for field in form %}

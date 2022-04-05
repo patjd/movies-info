@@ -11,12 +11,10 @@
 
     <!-- section 01: Top Trending Shows -->
     {% include 'movies/includes/section.html' with section_title='Top Movies' movies=top_movies profile=profile id='top'%}
-
-    <!-- section 02: Top Shows In Action -->
+    <!-- section 02: Top Shows In Drama -->
+    {% include 'movies/includes/section.html' with section_title='Top Movies In Drama' movies=top_thriller_movies profile=profile id='thriller' %}
+    <!-- section 03: Top Shows In Action -->
     {% include 'movies/includes/section.html' with section_title='Top Movies In Action' movies=top_action_movies profile=profile id='action'%}
-
-    <!-- section 03: Top Shows In Thriller -->
-    {% include 'movies/includes/section.html' with section_title='Top Movies In Thriller' movies=top_thriller_movies profile=profile id='thriller' %}
 
     <!-- Footer -->
     {% include 'movies/includes/footer.html' %}

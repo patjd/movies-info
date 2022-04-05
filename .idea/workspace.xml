@@ -5,29 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c4c27428-608c-4121-8ee2-9c09f4aae04f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/movies/templates/movies/cast.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/movies/templates/movies/change-password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/movies/templates/movies/includes/cast-card.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/movies/templates/movies/includes/cast-detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/includes/email-changed-password.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/includes/email-order.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movies/templates/movies/includes/search-info-card.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies/templates/movies/forgot-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/forgot-password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fixtures/Genre.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fixtures/Movie.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/templates/movies/change-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/change-password.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movies/templates/movies/includes/card.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/includes/card.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies/templates/movies/includes/cast.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/templates/movies/includes/cast-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/includes/cast-detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movies/templates/movies/includes/movie-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/includes/movie-detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies/templates/movies/includes/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/includes/navigation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies/templates/movies/includes/profile-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/includes/profile-info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies/templates/movies/includes/section.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/includes/section.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/templates/movies/includes/rating-modal.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/includes/rating-modal.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movies/templates/movies/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movies/templates/movies/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies/templates/movies/movie-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/movie-info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies/templates/movies/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movies/templates/movies/search-results.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/search-results.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/templates/movies/shopping-cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/shopping-cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/templates/movies/sign-up.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/sign-up.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/templates/movies/watchlist.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/watchlist.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movies/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movies/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies_info/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies_info/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +104,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649033409142</updated>
-      <workItem from="1649033410656" duration="32878000" />
+      <workItem from="1649033410656" duration="46104000" />
     </task>
     <servers />
   </component>

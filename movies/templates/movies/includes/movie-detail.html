@@ -81,10 +81,17 @@
 
                 <div class="row">
                     <div class="col-md-10">
-                        <a class="btn shopping-cart-btn mt-auto" href="{% if user.is_authenticated %}{% url "shopping-cart" movie_id %}{% else %}{% url "signin" %}{% endif %}">
-                            <i class="bi bi-cart-plus" style="margin-right: 10px;"></i>
-                            {{ price }} CAD
-                        </a>
+                    {% if cart %}
+                    <a class="btn shopping-cart-btn mt-auto" style="background-color: darkred" href="{% url "remove-cart" movie_id %}">
+                        Remove from cart
+                    </a>
+                    {% else %}
+                    <a class="btn shopping-cart-btn mt-auto" href="{% url "shopping-cart" movie_id %}">
+                        <i class="bi bi-cart-plus" style="margin-right: 10px;"></i>
+                        {{ price }} CAD
+                    </a>
+                    {% endif %}
+
                     </div>
                 </div>
             </div>

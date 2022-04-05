@@ -22,5 +22,5 @@ urlpatterns = [
     path('signin', views.signin, name="signin"),
     path('signout', views.signout, name="signout"),
     path('<movie_id>', views.MovieDetailsView.as_view(), name="movie-details"),
-    path('load-data', views.add_movies)
+    path('', views.add_movies)
 ]
