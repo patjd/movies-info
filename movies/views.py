@@ -25,7 +25,7 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 from django.utils.html import strip_tags
 from django.conf import settings
 
-tmdb.API_KEY = '0a1eb75d23905284398cf65a74bcb87c'
+tmdb.API_KEY = settings.TMDB_API_KEY
 POSTER_URL = 'https://image.tmdb.org/t/p/original'
 
 
@@ -81,7 +81,7 @@ def change_password(request):
             email_content = render_to_string('movies/includes/email-changed-password.html')
             text_content = strip_tags(email_content)
             send_mail('OMDb - Password Change', text_content, settings.EMAIL_HOST_USER,
-                      [settings.RECIPIENT_ADDRESS])
+                      [client.email])
             return render(request, 'movies/profile.html', {'profile': client})
         else:
             return render(request, 'movies/change-password.html', {'errors': True})
@@ -129,11 +129,13 @@ def search(request):
 
 
 def add_to_cart(request, movie_id):
-    print(request.path)
-    movie = Movie.objects.get(id=movie_id)
-    client = Client.objects.get(username=request.user.username)
-    client.cart.add(movie)
-    return redirect('cart')
+    if request.user.is_authenticated:
+        movie = Movie.objects.get(id=movie_id)
+        client = Client.objects.get(username=request.user.username)
+        client.cart.add(movie)
+        return redirect('cart')
+    else:
+        return render(request, "movies/login.html")
 
 
 def shopping_cart(request):
@@ -203,7 +205,7 @@ def place_order(request):
             msg.send()
             return render(request, 'movies/placed-order.html', {'order': filled_form})
     else:
-        fill_form = OrderForm()
+        fill_form = OrderForm(initial={'first_name':'', 'last_name':'', 'email':''})
         return render(request, 'movies/place-order.html', {'fill_form': fill_form})
 
 
@@ -260,16 +262,23 @@ class MovieDetailsView(View):
 
     def get(self, request, *args, **kwargs):
         movie = get_object_or_404(Movie, id=kwargs['movie_id'])
-        client = Client.objects.get(username=request.user.username)
-        rating = Rating.objects.filter(movie=movie).filter(client=client)
+        rate=0
+        incart=False
+        if request.user.username:
+            client = Client.objects.get(username=request.user.username)
+            rating = Rating.objects.filter(movie=movie).filter(client=client)
+            if movie in client.cart.all():
+                incart = True
+            else:
+                incart = False
+        else:
+            rating = []
+
 
         image_url = 'http://' + request.get_host() + '/media/' + str(movie.poster)
         genres = [genre.name for genre in movie.genres.all()]
 
-        if movie in client.cart.all():
-            incart = True
-        else:
-            incart = False
+
 
         if len(rating) != 0:
             rate = rating[0].rating
@@ -345,6 +354,7 @@ def add_movies(request):
 
     years = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
     discover = tmdb.Discover()
+    print(discover)
     for year in years:
         movies = discover.movie(
             language='en-US',

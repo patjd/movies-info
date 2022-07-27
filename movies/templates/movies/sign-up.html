@@ -44,7 +44,7 @@
         <div class="col" style="margin-top: 10px">
             <a href="{% url "signin" %}">Go to Signin</a>
         </div>
-    {{ form.errors }}
+
         {% if form.errors %}
             {% for field in form %}
                 {% for error in field.errors %}
